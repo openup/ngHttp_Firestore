@@ -1,0 +1,13 @@
+.loading-bar{
+    
+    position: fixed !important;
+    z-index: 99;
+    top: 0;
+    left: 0;
+    bottom: auto;
+    height: 8px !important;
+
+    .mat-progress-bar-buffer {
+        background: var(--header-bg);
+    }
+}

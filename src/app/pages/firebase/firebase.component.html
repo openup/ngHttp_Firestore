@@ -1,0 +1,68 @@
+<p>
+    <a [routerLink]="['/repos']">← Repos</a>
+</p>
+<form [formGroup]="firebaseFormGroup" (submit)="SubmitForm()">
+    <mat-form-field>
+        <mat-label>Titre</mat-label>
+        <input matInput type="text" required formControlName="title" />
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Description</mat-label>
+        <input matInput type="text" required formControlName="description" />
+    </mat-form-field>
+
+    <button mat-flat-button type="submit" color="primary">Ajouter</button>
+</form>
+
+
+
+@if(items && items.length){
+<table class="data-list" width="100%" cellPadding="4px" cellSpacing="4px">
+    <thead>
+        <tr>
+            <th>Titre</th>
+            <th>Description</th>
+            <th>Date</th>
+            <th>#</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (item of items; track item?.id){
+        <tr>
+            <td (click)="getDocByID(item.id)">{{item.title}}</td>
+            <td (click)="getDocDetails(item.id)">{{ item.description }}</td>
+            <td>{{ item.date.toDate() | date: 'dd MMM YY, hh:mm' }}</td>
+            <td (click)="del(item.id)" class="del-action">
+                <svg xmlns="http://www.w3.org/2000/svg" height="24" viewBox="0 0 24 24" width="24">
+                    <path d="M0 0h24v24H0z" fill="none" />
+                    <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"
+                        fill="currentColor" />
+                </svg>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+}
+
+@if(selectedDoc != undefined){
+@if(docDetails != undefined && docDetails.length){
+
+@for(data of docDetails; track data.docId){
+<div [contentEditable]="contentEditable" [id]="data.docId" [innerHTML]="data.details | safe "></div>
+<p>
+    <button mat-flat-button type="button" color="primary" (click)="contentEditable = true">Edit</button>&nbsp;<button
+        mat-flat-button type="button" color="primary" *ngIf="contentEditable"
+        (click)="updateDocDetails(data.docId)">Save</button>
+</p>
+}
+
+}
+
+@else {
+<div [contentEditable]="true" [id]="selectedDoc">Enter description here ...</div>
+<p>
+    <button mat-flat-button type="button" color="primary" (click)="setDocDetails(selectedDoc)">Save</button>
+</p>
+}
+}

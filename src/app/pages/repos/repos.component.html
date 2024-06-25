@@ -1,0 +1,28 @@
+<form [formGroup]="reposFormGroup" (submit)="SubmitForm()">
+    <mat-form-field>
+        <mat-label>Search repos</mat-label>
+        <input matInput type="text" required formControlName="searchTerm" />
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Language</mat-label>
+        <input matInput type="text" formControlName="language" />
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Min Stars</mat-label>
+        <input matInput type="number" [min]="0" formControlName="minStars" />
+    </mat-form-field>
+    <button mat-flat-button type="submit" color="primary">Search</button>
+</form>
+
+
+@if(alertMsg){
+<p class="alert-message mat-elevation-z8">{{alertMsg}}</p>
+}
+
+<data-list [data]="repos"></data-list>
+
+@if(total_count != 0){
+<mat-paginator [length]=total_count (page)="pageChanged($event)" [pageSize]="per_page" [hidePageSize]="false"
+    [pageSizeOptions]="[25,50,100, 150]" [pageIndex]="currentPage" aria-label="Select page">
+</mat-paginator>
+}

@@ -1,0 +1,28 @@
+<div class="block">
+<a [routerLink]="['/repos']" class="a-button">⤌ Repos</a>
+</div>
+@if(alertMsg){
+    <p class="alert-message mat-elevation-z8">{{alertMsg}}</p>
+}
+
+@if(commits?.length != 0){
+<table class="data-list" width="100%" cellPadding="4px" cellSpacing="4px">
+    <thead>
+        <tr>
+            <th>Author</th>
+            <th>Url</th>
+            <th>Message</th>
+        </tr>
+    </thead>
+    <tbody>
+        
+        @for (commit of commits; track commit?.node_id){
+        <tr>
+            <td>{{commit.commit.author.name}}</td>
+            <td><a href="{{ commit.commit.url}}" target="_blank">{{ commit.commit.url}}</a></td>
+            <td>{{ commit.commit.message}}</td>
+        </tr>
+        }
+    </tbody>
+</table>
+}

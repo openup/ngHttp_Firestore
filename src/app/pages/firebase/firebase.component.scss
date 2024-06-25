@@ -1,0 +1,33 @@
+.mat-mdc-form-field{
+    margin: auto 2px;
+}
+[mat-flat-button]{
+    margin: auto auto 16px 6px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.del-action{
+    transition: .2s;
+    &:hover{
+        color: #f00;
+    }
+}
+
+div[contentEditable]{
+ border-top: 1px solid #999;
+ display: block;
+ margin: 18px 12px 6px 12px;
+ padding: 6px;
+ text-align: left;
+ text-wrap : wrap;
+ transition: 0.3s;
+ 
+ &[contentEditable=true]{
+    background-color: #f0f1f0;
+    border-radius: 4px;
+    border: 1px solid #eaeaea;
+    color: #000;
+    overflow: auto;
+ }
+}

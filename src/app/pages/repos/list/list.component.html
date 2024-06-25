@@ -1,0 +1,21 @@
+<a [routerLink]="['/fire']">FireBase</a>
+@if(data && data.length){
+<table class="data-list" width="100%" cellPadding="4px" cellSpacing="4px">
+    <thead>
+        <tr>
+            <th>Avatar</th>
+            <th>Name</th>
+            <th>Created At <span (click)="_sortTable(isAsc);" class="pointer">⇅</span></th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (repo of data; track repo?.id){
+        <tr [routerLink]="['/commits', repo.id]" [title]="repo.description">
+            <td><img [src]="repo.owner.avatar_url" alt="Avatar" class="avatar"></td>
+            <td>{{ repo.name }}</td>
+            <td>{{ repo.created_at | date : 'EEEE, MMMM d, y' }}</td>
+        </tr>
+        }
+    </tbody>
+</table>
+}

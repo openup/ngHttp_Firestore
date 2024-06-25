@@ -1,0 +1,5 @@
+@if(loading | async){
+<mat-progress-bar class="loading-bar" [value]="100" mode="indeterminate"></mat-progress-bar>
+}
+
+<router-outlet />
